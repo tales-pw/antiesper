@@ -9,7 +9,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = Antiesper.MODID, version = Antiesper.VERSION) @Mod.EventBusSubscriber(Side.CLIENT)
+@Mod(modid = Antiesper.MODID, version = Antiesper.VERSION, clientSideOnly = true)
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class Antiesper {
     public static final String MODID = "@MODID@";
     public static final String VERSION = "@VERSION@";

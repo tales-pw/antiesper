@@ -19,11 +19,22 @@ import java.util.concurrent.ConcurrentHashMap;
     public static final String MODID = "@MODID@";
     public static final String VERSION = "@VERSION@";
 
+    public final static int NICK_DISTANCE = 30;
+    public final static int UPDATE_TICK = 10;
+
+    public static int ticks = 0;
     public static Map<EntityPlayer, Boolean> visibilityMap = new ConcurrentHashMap<>();
 
     @SubscribeEvent public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.START)
             return;
+
+        ticks++;
+
+        if (ticks < UPDATE_TICK)
+            return;
+
+        ticks = 0;
 
         Minecraft minecraft = Minecraft.getMinecraft();
 
@@ -44,7 +55,7 @@ import java.util.concurrent.ConcurrentHashMap;
         Vec3d pos = player.getPositionEyes(0);
         Vec3d otherPos = otherPlayer.getPositionEyes(0);
 
-        if (pos.distanceTo(otherPos) > 50)
+        if (pos.distanceTo(otherPos) > NICK_DISTANCE)
             return false;
 
         return otherPlayer.canEntityBeSeen(player);
